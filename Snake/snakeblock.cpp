@@ -60,3 +60,15 @@ void SnakeBlock::draw(QPainter * painter, int blockSize)
         this->nextSnakeBlock->draw(painter, blockSize);
     }
 }
+
+bool SnakeBlock::checkCollision(int headX, int headY)
+{
+    if(this->nextSnakeBlock == nullptr) return false;
+    else{
+        if(headX == this->X && headY == this->Y) return true;
+        else {
+            if(!this->isHead) return this->nextSnakeBlock->checkCollision(headX, headY);
+            else return this->nextSnakeBlock->checkCollision(this->X, this->Y);
+        }
+    }
+}

@@ -8,8 +8,10 @@ Game::Game(QWidget *parent) : QWidget(parent)
     this->mainTimer = new QTimer();
     this->mainTimer->setInterval(300);
 
+
     connect(mainTimer, &QTimer::timeout, this, &Game::updateSnakePosition);
     connect(mainTimer, &QTimer::timeout, this, &Game::drawSnake);
+    connect(mainTimer, &QTimer::timeout, this, &Game::checkCollision);
 
     this->mainTimer->start();
 
@@ -74,6 +76,14 @@ void Game::addApple()
 
     this->appleX *= blockSize;
     this->appleY *= blockSize;
+}
+
+void Game::checkCollision()
+{
+    if(this->head->checkCollision(-1, -1)){
+        this->mainTimer->stop();
+        qDebug() << "Game over";
+    }
 }
 
 void Game::keyPressEvent(QKeyEvent *ke)

@@ -20,6 +20,7 @@ public:
     void updatePosition(int x, int y);
     void eatApple();
     void draw(QPainter *, int blockSize);
+    bool checkCollision(int otherX, int otherY);
 
     bool isEating = false;
 };

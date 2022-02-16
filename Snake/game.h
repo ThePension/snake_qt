@@ -18,6 +18,7 @@ private slots:
     void updateSnakePosition();
     void drawSnake();
     void addApple();
+    void checkCollision();
 
 protected:
     void keyPressEvent(QKeyEvent * e) override;
