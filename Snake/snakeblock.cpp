@@ -48,10 +48,14 @@ void SnakeBlock::eatApple()
 void SnakeBlock::draw(QPainter * painter, int blockSize)
 {
     painter->setRenderHint(QPainter::Antialiasing);
-    if(this->isEating) painter->setPen(Qt::red);
+    if(this->isEating) {
+        painter->setPen(Qt::red);
+        painter->setBrush(Qt::darkGreen);
+    }
     else {
-        painter->setPen(Qt::darkGreen);
-        if(this->isHead) painter->setPen(Qt::blue);
+        painter->setPen(Qt::black);
+        painter->setBrush(Qt::darkGreen);
+        if(this->isHead) painter->setBrush(Qt::blue);
     }
 
     painter->drawRect(this->X, this->Y, blockSize, blockSize);

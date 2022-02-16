@@ -31,7 +31,7 @@ void Game::paintEvent(QPaintEvent *)
     QPainter * painter = new QPainter(this);
 
     // Draw the apple
-    painter->setPen(Qt::red);
+    painter->setBrush(Qt::red);
     painter->drawRect(this->appleX, this->appleY, blockSize, blockSize);
 
     // Draw the snake head
