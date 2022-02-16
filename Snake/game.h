@@ -16,9 +16,12 @@ public:
 
 private slots:
     void updateSnakePosition();
+    void drawSnake();
+    void addApple();
 
 protected:
     void keyPressEvent(QKeyEvent * e) override;
+    void paintEvent(QPaintEvent *) override;
 
 private:
     static const int mapSize = 16;
@@ -29,6 +32,8 @@ private:
 
     QTimer * mainTimer;
 
-    int X = 0, Y = 0;
+    int appleX, appleY;
+
+    int X = 1, Y = 0;
 };
 #endif // GAME_H
