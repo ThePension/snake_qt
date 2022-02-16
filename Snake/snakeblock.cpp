@@ -21,9 +21,12 @@ void SnakeBlock::updatePosition(int newPosX, int newPosY)
         if(this->nextSnakeBlock == nullptr) { // If this block is tail
             // Add new tail
             this->nextSnakeBlock = new SnakeBlock(oldPosX, oldPosY);
+            this->isEating = false;
         }else{
 
+            this->nextSnakeBlock->updatePosition(oldPosX, oldPosY);
             this->nextSnakeBlock->eatApple();
+            this->isEating = false;
         }
     }
     else{ // Update next block position
@@ -47,7 +50,6 @@ void SnakeBlock::draw(QPainter * painter)
     if(this->isEating) painter->setPen(Qt::red);
     else painter->setPen(Qt::darkGreen);
 
-    this->isEating = false;
     painter->drawRect(this->X, this->Y, 16, 16);
 
     if(this->nextSnakeBlock != nullptr) { // If this block is not the tail

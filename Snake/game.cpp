@@ -50,6 +50,7 @@ void Game::updateSnakePosition()
     if(!(this->X == 0 && this->Y == 0)) {
         int newX = this->head->X + this->X * blockSize;
         int newY = this->head->Y + this->Y * blockSize;
+
         if(newX < 0) newX =width();
         else if(newX > width()) newX = 0;
 
