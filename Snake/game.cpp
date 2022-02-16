@@ -1,21 +1,19 @@
 #include "game.h"
 
-Game::Game(QWidget *parent)
-    : QWidget(parent)
+Game::Game(QWidget *parent) : QWidget(parent)
 {
     std::srand(std::time(nullptr));
-    this->head = new SnakeBlock(32, 16, true);
-    this->head->nextSnakeBlock = new SnakeBlock(16, 16);
+    this->head = new SnakeBlock(10 * blockSize, 10 * blockSize, true);
 
     this->mainTimer = new QTimer();
-    this->mainTimer->setInterval(500);
+    this->mainTimer->setInterval(300);
 
     connect(mainTimer, &QTimer::timeout, this, &Game::updateSnakePosition);
     connect(mainTimer, &QTimer::timeout, this, &Game::drawSnake);
 
     this->mainTimer->start();
 
-    this->setFixedSize(320, 320);
+    this->setFixedSize(20 * blockSize, 20 * blockSize);
 
     this->addApple();
 }
@@ -32,10 +30,10 @@ void Game::paintEvent(QPaintEvent *)
 
     // Draw the apple
     painter->setPen(Qt::red);
-    painter->drawRect(this->appleX, this->appleY, 16, 16);
+    painter->drawRect(this->appleX, this->appleY, blockSize, blockSize);
 
     // Draw the snake head
-    this->head->draw(painter);
+    this->head->draw(painter, blockSize);
 
     // Delete painter
     delete painter; painter = nullptr;
@@ -43,16 +41,15 @@ void Game::paintEvent(QPaintEvent *)
 
 void Game::updateSnakePosition()
 {
-    int blockSize = 16;
     if(!(this->X == 0 && this->Y == 0)) {
         int newX = this->head->X + this->X * blockSize;
         int newY = this->head->Y + this->Y * blockSize;
 
-        if(newX < 0) newX =width();
-        else if(newX > width()) newX = 0;
+        if(newX < 0) newX =width() - blockSize;
+        else if(newX > width() - blockSize) newX = 0;
 
-        if(newY < 0) newY = height();
-        else if(newY > height()) newY = 0;
+        if(newY < 0) newY = height() - blockSize;
+        else if(newY > height() - blockSize) newY = 0;
 
         if(newX == appleX && newY == appleY) {
             this->head->eatApple();
@@ -70,15 +67,13 @@ void Game::drawSnake()
 
 void Game::addApple()
 {
-    int maxX = width() / 16;
-    int maxY = height() / 16;
+    int maxX = width() / blockSize;
+    int maxY = height() / blockSize;
     this->appleX = std::rand()/((RAND_MAX + 1u)/ (maxX));
     this->appleY = std::rand()/((RAND_MAX + 1u)/ (maxY));
 
-    this->appleX *= 16;
-    this->appleY *= 16;
-
-    qDebug() << this->appleX << " ; " << this->appleY;
+    this->appleX *= blockSize;
+    this->appleY *= blockSize;
 }
 
 void Game::keyPressEvent(QKeyEvent *ke)

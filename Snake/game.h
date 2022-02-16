@@ -24,9 +24,7 @@ protected:
     void paintEvent(QPaintEvent *) override;
 
 private:
-    static const int mapSize = 16;
-
-    //SnakeBlock grid[mapSize][mapSize];
+    static const int blockSize = 16;
 
     SnakeBlock * head;
 
@@ -34,6 +32,6 @@ private:
 
     int appleX, appleY;
 
-    int X = 1, Y = 0;
+    int X = 0, Y = 0;
 };
 #endif // GAME_H

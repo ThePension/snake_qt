@@ -19,7 +19,7 @@ public:
 
     void updatePosition(int x, int y);
     void eatApple();
-    void draw(QPainter *);
+    void draw(QPainter *, int blockSize);
 
     bool isEating = false;
 };

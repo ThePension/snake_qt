@@ -45,7 +45,7 @@ void SnakeBlock::eatApple()
     this->isEating = true;
 }
 
-void SnakeBlock::draw(QPainter * painter)
+void SnakeBlock::draw(QPainter * painter, int blockSize)
 {
     painter->setRenderHint(QPainter::Antialiasing);
     if(this->isEating) painter->setPen(Qt::red);
@@ -54,9 +54,9 @@ void SnakeBlock::draw(QPainter * painter)
         if(this->isHead) painter->setPen(Qt::blue);
     }
 
-    painter->drawRect(this->X, this->Y, 16, 16);
+    painter->drawRect(this->X, this->Y, blockSize, blockSize);
 
     if(this->nextSnakeBlock != nullptr) { // If this block is not the tail
-        this->nextSnakeBlock->draw(painter);
+        this->nextSnakeBlock->draw(painter, blockSize);
     }
 }
