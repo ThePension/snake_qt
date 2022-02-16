@@ -8,10 +8,12 @@
 class SnakeBlock
 {
 public:
-    SnakeBlock(int x, int y);
+    SnakeBlock(int x, int y, bool isHead = false);
 
     int X;
     int Y;
+
+    bool isHead = false;
 
     SnakeBlock * nextSnakeBlock = nullptr;
 

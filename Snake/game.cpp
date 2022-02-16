@@ -4,10 +4,8 @@ Game::Game(QWidget *parent)
     : QWidget(parent)
 {
     std::srand(std::time(nullptr));
-    this->head = new SnakeBlock(32, 16);
-    this->head->eatApple();
+    this->head = new SnakeBlock(32, 16, true);
     this->head->nextSnakeBlock = new SnakeBlock(16, 16);
-    this->head->nextSnakeBlock->nextSnakeBlock = new SnakeBlock(16, 32);
 
     this->mainTimer = new QTimer();
     this->mainTimer->setInterval(500);
@@ -17,7 +15,6 @@ Game::Game(QWidget *parent)
 
     this->mainTimer->start();
 
-    // this->resize(128, 128);
     this->setFixedSize(320, 320);
 
     this->addApple();

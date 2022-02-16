@@ -1,9 +1,10 @@
 #include "snakeblock.h"
 
-SnakeBlock::SnakeBlock(int x, int y)
+SnakeBlock::SnakeBlock(int x, int y, bool isHead)
 {
     this->X = x;
     this->Y = y;
+    this->isHead = isHead;
 }
 
 void SnakeBlock::updatePosition(int newPosX, int newPosY)
@@ -48,7 +49,10 @@ void SnakeBlock::draw(QPainter * painter)
 {
     painter->setRenderHint(QPainter::Antialiasing);
     if(this->isEating) painter->setPen(Qt::red);
-    else painter->setPen(Qt::darkGreen);
+    else {
+        painter->setPen(Qt::darkGreen);
+        if(this->isHead) painter->setPen(Qt::blue);
+    }
 
     painter->drawRect(this->X, this->Y, 16, 16);
 
